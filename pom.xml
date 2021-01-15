@@ -7,7 +7,7 @@
     <groupId>cn.minsin.version</groupId>
     <artifactId>mutils-version-pom</artifactId>
     <packaging>pom</packaging>
-    <version>1.0-RELEASE</version>
+    <version>1.0.RELEASE</version>
     <name>mutils-version-pom</name>
 
     <description>A mini utils for java.</description>
@@ -26,7 +26,7 @@
         <maven-source-plugin.version>3.0.1</maven-source-plugin.version>
         <nexus-staging-maven-plugin.version>1.6.7</nexus-staging-maven-plugin.version>
         <maven-gpg-plugin.version>1.5</maven-gpg-plugin.version>
-        <!-- api组件最新管理-->
+        <maven-javadoc-plugin.version>3.0.0-M1</maven-javadoc-plugin.version>
 
     </properties>
     <developers>
@@ -111,9 +111,26 @@
                     <serverId>oss</serverId>
                     <nexusUrl>https://oss.sonatype.org/</nexusUrl>
                     <autoReleaseAfterClose>true</autoReleaseAfterClose>
+                    <stagingProgressTimeoutMinutes>30</stagingProgressTimeoutMinutes>
                 </configuration>
             </plugin>
 
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-javadoc-plugin</artifactId>
+                <version>${maven-javadoc-plugin.version}</version>
+                <executions>
+                    <execution>
+                        <id>attach-javadocs</id>
+                        <goals>
+                            <goal>jar</goal>
+                        </goals>
+                        <configuration>
+                            <additionalparam>-Xdoclint:none</additionalparam>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
         </plugins>
     </build>
     <repositories>
